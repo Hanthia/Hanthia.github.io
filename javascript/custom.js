@@ -48,63 +48,6 @@
                 return false;
             });
         }
-        function initPortfolio() {
-            var all = '#a,#b,#c';
-            var afterFirst = '#b,#c';
-            var addButton = '#add-more';
-            var addButtonIcon = '#port-add-icon';
-            var otherOption = 'a.cate';
-            var allOption = 'a#all-sample';
-            $(afterFirst).addClass('hide');
-            $(addButton).addClass('x');
-            $(allOption).on('click', function() {
-                $(addButton).removeClass('hide').addClass('x');
-                $(all).removeClass('tab-pane');
-                $(afterFirst).addClass('hide');
-                $(addButtonIcon).addClass('fa-plus').removeClass('fa-arrow-up');
-            });
-            $(otherOption).on('click', function() {
-                $(addButton).addClass('hide x');
-                $(afterFirst).removeClass('hide');
-                $(all).addClass('tab-pane');
-                $(addButtonIcon).addClass('fa-plus').removeClass('fa-arrow-up');
-            });
-            $(addButton).on('click', function() {
-                if ($(addButton).hasClass('x')) {
-                    $(all).removeClass('tab-pane hide');
-                    $(addButton).removeClass('x');
-                    $(addButtonIcon).removeClass('fa-plus').addClass('fa-arrow-up');
-                } else {
-                    $(afterFirst).addClass('hide');
-                    $(addButton).addClass('x');
-                    $(addButtonIcon).addClass('fa-plus').removeClass('fa-arrow-up');
-                }
-            });
-            $('li.list-shuffle,#add-more').on('click', function() {
-                $("div.inLeft").removeClass('InLeft').hide().addClass('InLeft').show();
-                $("div.inRight").removeClass('InRight').hide().addClass('InRight').show();
-            });
-            $('.popup-image').magnificPopup({
-                type: 'image',
-                removalDelay: 160,
-                callbacks: {
-                    beforeOpen: function() {
-                        this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-                        this.st.mainClass = this.st.el.attr('data-effect');
-                    }
-                },
-                closeOnContentClick: true,
-                midClick: true
-            });
-            $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-                disableOn: 700,
-                type: 'iframe',
-                mainClass: 'mfp-fade',
-                removalDelay: 160,
-                preloader: false,
-                fixedContentPos: false
-            });
-        }
         function initSkills() {
             $('div.skillbar').each(function() {
                 $(this).find('div.skillbar-bar').css({
@@ -133,7 +76,7 @@
                     var $first = $('ul#technologies_slice-list').find('li:first');
                     $first.animate({
                         'margin-left': '-140px'
-                    }, 2000, function() {
+                    }, 1000, function() {
                         $first.remove().css({
                             'margin-left': '0px'
                         });
@@ -150,192 +93,12 @@
                 paginationClickable: true
             });
         }
-        function initMapsNormal() {
-            var mapOptions = {
-                zoom: 17,
-                center: new google.maps.LatLng(51.5287352,-0.3817831),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: false,
-                disableDefaultUI: false
-            };
-            var myMap = new google.maps.Map(document.getElementById('myMap'),mapOptions);
-            var normal = new MarkerWithLabel({
-                position: myMap.getCenter(),
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 0
-                },
-                map: myMap,
-                labelAnchor: new google.maps.Point(10,10),
-                labelClass: "map-label",
-                draggable: false
-            });
-        }
-        function initMapsDark() {
-            var styles = [{
-                "featureType": "all",
-                "elementType": "labels.text.fill",
-                "stylers": [{
-                    "saturation": 36
-                }, {
-                    "color": "#000000"
-                }, {
-                    "lightness": 40
-                }]
-            }, {
-                "featureType": "all",
-                "elementType": "labels.text.stroke",
-                "stylers": [{
-                    "visibility": "on"
-                }, {
-                    "color": "#000000"
-                }, {
-                    "lightness": 16
-                }]
-            }, {
-                "featureType": "all",
-                "elementType": "labels.icon",
-                "stylers": [{
-                    "visibility": "off"
-                }]
-            }, {
-                "featureType": "administrative",
-                "elementType": "geometry.fill",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 20
-                }]
-            }, {
-                "featureType": "administrative",
-                "elementType": "geometry.stroke",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 17
-                }, {
-                    "weight": 1.2
-                }]
-            }, {
-                "featureType": "landscape",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 20
-                }]
-            }, {
-                "featureType": "poi",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 21
-                }]
-            }, {
-                "featureType": "road.highway",
-                "elementType": "geometry.fill",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 17
-                }]
-            }, {
-                "featureType": "road.highway",
-                "elementType": "geometry.stroke",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 29
-                }, {
-                    "weight": 0.2
-                }]
-            }, {
-                "featureType": "road.arterial",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 18
-                }]
-            }, {
-                "featureType": "road.local",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 16
-                }]
-            }, {
-                "featureType": "transit",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 19
-                }]
-            }, {
-                "featureType": "water",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#000000"
-                }, {
-                    "lightness": 17
-                }]
-            }];
-            var mapOptions = {
-                zoom: 17,
-                center: new google.maps.LatLng(51.5287352,-0.3817831),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: false,
-                disableDefaultUI: false,
-                styles: styles
-            };
-            var myMap = new google.maps.Map(document.getElementById('myMap'),mapOptions);
-            var dark = new MarkerWithLabel({
-                position: myMap.getCenter(),
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 0
-                },
-                map: myMap,
-                labelAnchor: new google.maps.Point(10,10),
-                labelClass: "map-label",
-                draggable: false
-            });
-        }
-        function initMail() {
-            $('form#contact-form').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                $("#submit").attr('disabled', 'disabled');
-                var post_data = form.serialize();
-                $('div#form-loader').removeClass('is-hidden').fadeIn(500);
-                $.ajax({
-                    type: 'POST',
-                    url: 'php/mail_handler.php',
-                    data: post_data
-                }).done(function() {
-                    $('div#form-loader').fadeOut(500);
-                    Materialize.toast('Message Sent! I will contact you shortly, Thanks', 4000);
-                    $("form#contact-form")[0].reset();
-                    Materialize.updateTextFields();
-                    $("#submit").removeAttr('disabled', 'disabled');
-                }).fail(function() {
-                    $('div#form-loader').fadeOut(500);
-                    Materialize.toast('Sorry! Something Wrong, Try Again', 4000);
-                    $("#submit").removeAttr('disabled', 'disabled');
-                });
-            });
-        }
+
         initNav();
         initSmoothScroll();
         initScrollToTop();
-        initPortfolio();
         initSkills();
         inittechnologies_sliceSliders();
-        initMail();
-        initMapsNormal();
     });
     jQuery(window).on('load', function() {
         $('div#loading').fadeOut(500);
